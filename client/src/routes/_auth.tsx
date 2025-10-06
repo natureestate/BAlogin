@@ -1,5 +1,6 @@
-import { createFileRoute, Outlet, redirect } from '@tanstack/react-router'
+import { createFileRoute, Outlet, useNavigate } from '@tanstack/react-router'
 import { useSession } from '@/lib/auth'
+import { useEffect } from 'react'
 
 /**
  * Auth Layout Route
@@ -12,18 +13,34 @@ export const Route = createFileRoute('/_auth')({
 
 function AuthLayout() {
   const { data: session, isLoading } = useSession()
+  const navigate = useNavigate()
 
-  // ถ้า user login แล้วให้ redirect ไป dashboard
-  if (!isLoading && session) {
-    redirect({ to: '/dashboard', throw: true })
-  }
+  // ใช้ useEffect เพื่อ redirect ถ้า user login แล้ว
+  useEffect(() => {
+    if (!isLoading && session) {
+      navigate({ to: '/dashboard' })
+    }
+  }, [isLoading, session, navigate])
 
+  // แสดง loading state ขณะตรวจสอบ session
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
           <p className="mt-4 text-muted-foreground">กำลังโหลด...</p>
+        </div>
+      </div>
+    )
+  }
+
+  // ถ้ามี session แล้วให้แสดง loading (จะ redirect ใน useEffect)
+  if (session) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-4 text-muted-foreground">กำลังเข้าสู่ระบบ...</p>
         </div>
       </div>
     )
