@@ -1,0 +1,24 @@
+{
+  "name": "@balogin/server",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --env dev",
+    "deploy": "wrangler deploy --env production",
+    "db:create:dev": "wrangler d1 create balogin-db-dev",
+    "db:create:prod": "wrangler d1 create balogin-db",
+    "db:migrate:dev": "wrangler d1 execute DB --env dev --local --file=./migrations/schema.sql",
+    "db:migrate:prod": "wrangler d1 execute DB --env production --remote --file=./migrations/schema.sql",
+    "db:seed:dev": "wrangler d1 execute DB --env dev --local --file=./migrations/seed-dev.sql"
+  },
+  "dependencies": {
+    "hono": "^4.7.10",
+    "better-auth": "^1.3.26"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250115.0",
+    "wrangler": "^3.103.0",
+    "typescript": "^5.7.3"
+  }
+}
+

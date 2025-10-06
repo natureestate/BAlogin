@@ -1,0 +1,34 @@
+name = "balogin-api"
+main = "src/index.ts"
+compatibility_date = "2025-10-06"
+workers_dev = true
+
+# Environment Variables (ใช้ .dev.vars สำหรับ local development)
+# ตัวอย่าง:
+# BETTER_AUTH_SECRET=your-secret-key
+# GOOGLE_CLIENT_ID=your-google-client-id
+# GOOGLE_CLIENT_SECRET=your-google-client-secret
+# GITHUB_CLIENT_ID=your-github-client-id
+# GITHUB_CLIENT_SECRET=your-github-client-secret
+# FRONTEND_URL=http://localhost:5173
+
+# Development Environment Configuration
+[env.dev]
+name = "balogin-api-dev"
+vars = { NODE_ENV = "development" }
+
+[[env.dev.d1_databases]]
+binding = "DB"
+database_name = "balogin-db-dev"
+database_id = "1ce315f2-8649-45ef-8237-8d5afd6b6c01"
+
+# Production Environment Configuration
+[env.production]
+name = "balogin-api"
+vars = { NODE_ENV = "production" }
+
+[[env.production.d1_databases]]
+binding = "DB"
+database_name = "balogin-db"
+database_id = "your-prod-database-id-here"
+

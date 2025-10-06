@@ -1,0 +1,53 @@
+# ===========================================
+# Development Environment Variables Template
+# ===========================================
+# คัดลอกไฟล์นี้เป็น .dev.vars และกรอกข้อมูลจริง
+
+# Environment Mode
+NODE_ENV=development
+
+# Better Auth Secret
+# สร้างด้วยคำสั่ง: openssl rand -base64 32
+BETTER_AUTH_SECRET=your-secret-key-here
+
+# ===========================================
+# Development User Credentials (Auto-seed)
+# ===========================================
+# User นี้จะถูกสร้างอัตโนมัติเมื่อ dev server เริ่มทำงาน
+DEV_USER_EMAIL=dev@example.com
+DEV_USER_PASSWORD=dev123456
+DEV_USER_NAME=Dev User
+
+# ===========================================
+# Social Login Providers (ไม่จำเป็นใน Dev)
+# ===========================================
+# ใน development mode social login จะถูกปิดการใช้งาน
+# หาก uncomment ต่อไปนี้ก็จะเปิดใช้งาน Google/GitHub OAuth
+
+# Google OAuth
+# สร้าง credentials ที่: https://console.cloud.google.com/
+# GOOGLE_CLIENT_ID=your-google-client-id
+# GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+# GitHub OAuth
+# สร้าง OAuth App ที่: https://github.com/settings/developers
+# GITHUB_CLIENT_ID=your-github-client-id
+# GITHUB_CLIENT_SECRET=your-github-client-secret
+
+# ===========================================
+# URLs
+# ===========================================
+# Frontend URL (React app)
+FRONTEND_URL=http://localhost:5173
+
+# Backend Base URL (Cloudflare Worker)
+BASE_URL=http://localhost:8787
+
+# ===========================================
+# Production Environment
+# ===========================================
+# สำหรับ production ให้ตั้งค่าผ่าน Cloudflare Dashboard:
+# 1. ไปที่ Workers & Pages > balogin-api > Settings > Variables
+# 2. เพิ่ม environment variables ทั้งหมด
+# 3. ต้องมี GOOGLE_CLIENT_ID และ GOOGLE_CLIENT_SECRET สำหรับ production
+# 4. ใช้ secret key ที่แข็งแกร่งสำหรับ BETTER_AUTH_SECRET
