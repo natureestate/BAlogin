@@ -1,6 +1,7 @@
 import { createFileRoute, Outlet, redirect, useNavigate } from '@tanstack/react-router'
 import { useSession } from '@/lib/auth'
 import { useEffect } from 'react'
+import { SidebarProvider } from '@/components/ui/sidebar'
 
 /**
  * Protected Layout Route
@@ -46,6 +47,10 @@ function ProtectedLayout() {
     )
   }
 
-  return <Outlet />
+  return (
+    <SidebarProvider>
+      <Outlet />
+    </SidebarProvider>
+  )
 }
 
